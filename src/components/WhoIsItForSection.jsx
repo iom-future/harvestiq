@@ -98,7 +98,11 @@ export default function WhoIsItForSection() {
                 <img
                   src={segment.image}
                   alt={segment.alt}
+                  width={960}
+                  height={536}
                   loading="lazy"
+                  decoding="async"
+                  fetchPriority="low"
                   className="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.03] opacity-90 group-hover:opacity-100"
                 />
               </div>

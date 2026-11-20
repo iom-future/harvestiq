@@ -95,7 +95,11 @@ export default function TestimonialsSection() {
                   <img
                     src={item.image}
                     alt={item.author}
+                    width={48}
+                    height={48}
                     loading="lazy"
+                    decoding="async"
+                    fetchPriority="low"
                     className="w-12 h-12 shrink-0 object-cover object-top rounded-[2px] border border-[#273440] bg-[#17212B]"
                   />
                 ) : (

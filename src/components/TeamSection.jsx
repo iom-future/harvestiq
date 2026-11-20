@@ -102,7 +102,11 @@ export default function TeamSection() {
                 <img
                   src={member.image}
                   alt={`${member.name}, ${member.role}`}
+                  width={600}
+                  height={804}
                   loading="lazy"
+                  decoding="async"
+                  fetchPriority="low"
                   className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.025]"
                 />
               </div>
