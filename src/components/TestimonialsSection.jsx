@@ -10,22 +10,28 @@ const TESTIMONIALS = [
     quote:
       'In fresh produce wholesale, knowing a Kano tomato surge is arriving ten days early changes how you price, buy, and allocate cold-room space. HarvestIQ turns phone calls and guesswork into a structured operating picture.',
     author: 'Babajide Adewale',
+    initials: 'BA',
     role: 'Managing Director, Mile 12 Produce Trading Co.',
     location: 'Lagos',
+    image: null,
   },
   {
     quote:
       'Our biggest cost is not fuel—it is dispatching trucks into corridors where demand has already softened or supply is delayed at aggregation hubs. Having forward corridor signals helps us route volume before perishable value drops.',
     author: 'Hauwa Abdullahi',
+    initials: 'HA',
     role: 'Head of Cold-Chain Logistics, Northern Corridor Foods',
     location: 'Abuja & Kaduna',
+    image: '/images/testimonial-hauwa.jpg',
   },
   {
     quote:
       'Supermarket produce teams constantly walk a tightrope between empty shelves and end-of-week markdowns. Seeing regional supply and demand side by side makes weekly procurement far more disciplined.',
     author: 'Emeka Nwosu',
+    initials: 'EN',
     role: 'Fresh Procurement Lead, Coastal Grocer Group',
     location: 'Port Harcourt',
+    image: null,
   },
 ];
 
@@ -84,14 +90,31 @@ export default function TestimonialsSection() {
                 &ldquo;{item.quote}&rdquo;
               </blockquote>
 
-              <figcaption className="pt-5 border-t border-[#273440]/80">
-                <p className="font-display text-base font-medium text-[#F4F6F7]">
-                  {item.author}
-                </p>
-                <p className="text-xs text-[#9AA8B5] mt-1">{item.role}</p>
-                <p className="font-mono text-[11px] text-[#D8A64A] mt-1.5">
-                  {item.location}
-                </p>
+              <figcaption className="pt-5 border-t border-[#273440]/80 flex items-center gap-4">
+                {item.image ? (
+                  <img
+                    src={item.image}
+                    alt={item.author}
+                    loading="lazy"
+                    className="w-12 h-12 shrink-0 object-cover object-top rounded-[2px] border border-[#273440] bg-[#17212B]"
+                  />
+                ) : (
+                  <div
+                    aria-hidden="true"
+                    className="w-12 h-12 shrink-0 flex items-center justify-center rounded-[2px] border border-[#273440] bg-[#17212B] font-mono text-xs tracking-wider text-[#D8A64A]"
+                  >
+                    {item.initials}
+                  </div>
+                )}
+                <div className="min-w-0">
+                  <p className="font-display text-base font-medium text-[#F4F6F7]">
+                    {item.author}
+                  </p>
+                  <p className="text-xs text-[#9AA8B5] mt-0.5 leading-snug">{item.role}</p>
+                  <p className="font-mono text-[11px] text-[#D8A64A] mt-1">
+                    {item.location}
+                  </p>
+                </div>
               </figcaption>
             </figure>
           ))}
