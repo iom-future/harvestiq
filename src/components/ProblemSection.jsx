@@ -143,7 +143,6 @@ export default function ProblemSection() {
 
   return (
     <section
-      id="about"
       ref={sectionRef}
       className="py-20 lg:py-28 bg-[#111821] border-b border-[#273440]"
     >

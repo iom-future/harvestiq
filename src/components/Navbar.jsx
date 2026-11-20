@@ -1,28 +1,74 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
 import { HarvestIQLogo } from './Logo';
 
 const NAV_LINKS = [
-  { label: 'Platform', href: '#platform' },
-  { label: 'Intelligence', href: '#intelligence' },
-  { label: 'Solutions', href: '#solutions' },
-  { label: 'About', href: '#about' },
+  { id: 'platform', label: 'Platform', href: '#platform' },
+  { id: 'intelligence', label: 'Intelligence', href: '#intelligence' },
+  { id: 'solutions', label: 'Solutions', href: '#solutions' },
+  { id: 'team', label: 'Team', href: '#team' },
+  { id: 'about', label: 'About', href: '#about' },
 ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('');
+  const isClickScrollingRef = useRef(false);
+  const unlockTimerRef = useRef(null);
+
+  const lockScrollSpy = () => {
+    isClickScrollingRef.current = true;
+    if (unlockTimerRef.current) {
+      window.clearTimeout(unlockTimerRef.current);
+    }
+    unlockTimerRef.current = window.setTimeout(() => {
+      isClickScrollingRef.current = false;
+    }, 900);
+  };
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    const updateOnScroll = () => {
+      const y = window.scrollY;
+      setScrolled(y > 24);
+
+      // Keep the clicked section active while smooth-scrolling so the underline
+      // appears directly on the target instead of stepping through intermediate links.
+      if (isClickScrollingRef.current) return;
+
+      const offset = y + 140;
+      let current = '';
+
+      for (const link of NAV_LINKS) {
+        const el = document.getElementById(link.id);
+        if (!el) continue;
+        if (offset >= el.offsetTop) {
+          current = link.id;
+        }
+      }
+
+      setActiveSection(current);
+    };
+
+    updateOnScroll();
+    window.addEventListener('scroll', updateOnScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', updateOnScroll);
+      if (unlockTimerRef.current) {
+        window.clearTimeout(unlockTimerRef.current);
+      }
+    };
   }, []);
+
+  const handleLinkClick = (id) => {
+    setActiveSection(id);
+    lockScrollSpy();
+    setMobileOpen(false);
+  };
 
   return (
     <header
-      className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 inset-x-0 z-50 transition-colors duration-300 ${
         scrolled
           ? 'bg-[#0A0D12]/92 backdrop-blur-md border-b border-[#273440]'
           : 'bg-transparent border-b border-transparent'
@@ -31,27 +77,44 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
         <a
           href="#top"
+          onClick={() => {
+            setActiveSection('');
+            lockScrollSpy();
+          }}
           className="focus:outline-none focus-visible:ring-1 focus-visible:ring-[#D8A64A] rounded-xs"
           aria-label="HarvestIQ Home"
         >
           <HarvestIQLogo />
         </a>
 
-        <nav className="hidden md:flex items-center gap-9" aria-label="Primary">
-          {NAV_LINKS.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className="text-sm text-[#9AA8B5] hover:text-[#F4F6F7] transition-colors duration-200 tracking-wide"
-            >
-              {link.label}
-            </a>
-          ))}
+        <nav className="hidden md:flex items-center gap-8" aria-label="Primary">
+          {NAV_LINKS.map((link) => {
+            const isActive = activeSection === link.id;
+            return (
+              <a
+                key={link.id}
+                href={link.href}
+                onClick={() => handleLinkClick(link.id)}
+                aria-current={isActive ? 'location' : undefined}
+                className={`relative py-1 text-sm tracking-wide transition-colors duration-200 border-b-2 ${
+                  isActive
+                    ? 'text-[#F4F6F7] border-[#D8A64A]'
+                    : 'text-[#9AA8B5] border-transparent hover:text-[#F4F6F7]'
+                }`}
+              >
+                {link.label}
+              </a>
+            );
+          })}
         </nav>
 
         <div className="hidden md:flex items-center">
           <a
             href="#early-access"
+            onClick={() => {
+              setActiveSection('');
+              lockScrollSpy();
+            }}
             className="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-medium bg-[#D8A64A] text-[#0A0D12] hover:bg-[#e2b45d] transition-colors duration-200 rounded-[2px]"
           >
             Request Early Access
@@ -72,21 +135,33 @@ export default function Navbar() {
 
       {mobileOpen && (
         <div className="md:hidden bg-[#0A0D12] border-b border-[#273440] px-5 py-5 space-y-4">
-          <nav className="flex flex-col space-y-3" aria-label="Mobile navigation">
-            {NAV_LINKS.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                onClick={() => setMobileOpen(false)}
-                className="text-sm text-[#9AA8B5] hover:text-[#F4F6F7] py-1.5 border-b border-[#273440]/50"
-              >
-                {link.label}
-              </a>
-            ))}
+          <nav className="flex flex-col space-y-2" aria-label="Mobile navigation">
+            {NAV_LINKS.map((link) => {
+              const isActive = activeSection === link.id;
+              return (
+                <a
+                  key={link.id}
+                  href={link.href}
+                  onClick={() => handleLinkClick(link.id)}
+                  aria-current={isActive ? 'location' : undefined}
+                  className={`py-2 text-sm border-b ${
+                    isActive
+                      ? 'text-[#F4F6F7] border-[#D8A64A]'
+                      : 'text-[#9AA8B5] border-[#273440]/50 hover:text-[#F4F6F7]'
+                  }`}
+                >
+                  {link.label}
+                </a>
+              );
+            })}
           </nav>
           <a
             href="#early-access"
-            onClick={() => setMobileOpen(false)}
+            onClick={() => {
+              setActiveSection('');
+              lockScrollSpy();
+              setMobileOpen(false);
+            }}
             className="inline-flex w-full items-center justify-center gap-1.5 px-4 py-2.5 text-sm font-medium bg-[#D8A64A] text-[#0A0D12] rounded-[2px]"
           >
             Request Early Access
