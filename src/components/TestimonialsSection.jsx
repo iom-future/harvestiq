@@ -22,7 +22,7 @@ const TESTIMONIALS = [
     initials: 'HA',
     role: 'Head of Cold-Chain Logistics, Northern Corridor Foods',
     location: 'Abuja & Kaduna',
-    image: '/images/testimonial-hauwa.jpg',
+    image: `${import.meta.env.BASE_URL}images/testimonial-hauwa.jpg`,
   },
   {
     quote:

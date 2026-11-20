@@ -5,42 +5,44 @@ import { useGSAP } from '@gsap/react';
 
 gsap.registerPlugin(ScrollTrigger);
 
+const BASE = import.meta.env.BASE_URL;
+
 const TEAM_MEMBERS = [
   {
     name: 'Chinedu Okafor',
     role: 'Co-Founder & Chief Executive Officer',
     bio: 'Leads strategy and commercial partnerships across Nigeria’s wholesale food corridors and institutional buyers.',
-    image: '/images/team-chinedu.jpg',
+    image: `${BASE}images/team-chinedu.jpg`,
   },
   {
     name: 'Amina Bello',
     role: 'Co-Founder & Head of Predictive Intelligence',
     bio: 'Directs time-series forecasting, seasonal demand modeling, and anomaly detection systems.',
-    image: '/images/team-amina.jpg',
+    image: `${BASE}images/team-amina.jpg`,
   },
   {
     name: 'Tunde Adeyemi',
     role: 'Chief Technology Officer',
     bio: 'Architects the distributed data ingestion pipeline, geospatial supply graph, and enterprise platform.',
-    image: '/images/team-tunde.jpg',
+    image: `${BASE}images/team-tunde.jpg`,
   },
   {
     name: 'Ngozi Eze',
     role: 'Head of Supply Network Operations',
     bio: 'Oversees producer, aggregator, and cold-chain logistics integration across key regional trade routes.',
-    image: '/images/team-ngozi.jpg',
+    image: `${BASE}images/team-ngozi.jpg`,
   },
   {
     name: 'Ibrahim Musa',
     role: 'Lead Market & Agricultural Economist',
     bio: 'Specializes in commodity price dynamics, harvest seasonality, and regional food-market behavior.',
-    image: '/images/team-ibrahim.jpg',
+    image: `${BASE}images/team-ibrahim.jpg`,
   },
   {
     name: 'Folake Ogunleye',
     role: 'Head of Product & Partner Experience',
     bio: 'Designs decision-support workflows and leads onboarding for wholesale and distribution pilot partners.',
-    image: '/images/team-folake.jpg',
+    image: `${BASE}images/team-folake.jpg`,
   },
 ];
 

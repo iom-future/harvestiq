@@ -5,12 +5,14 @@ import { useGSAP } from '@gsap/react';
 
 gsap.registerPlugin(ScrollTrigger);
 
+const BASE = import.meta.env.BASE_URL;
+
 const SEGMENTS = [
   {
     title: 'Wholesalers',
     description:
       'Improve sourcing decisions, anticipate market changes, and manage inventory more effectively.',
-    image: '/images/segment-wholesalers.jpg',
+    image: `${BASE}images/segment-wholesalers.jpg`,
     alt: 'Modern fresh produce wholesale distribution hall with stacked crates under warm architectural lighting',
     span: 'lg:col-span-7',
   },
@@ -18,7 +20,7 @@ const SEGMENTS = [
     title: 'Distributors',
     description:
       'Understand supply availability, plan movements, and identify potential disruptions earlier.',
-    image: '/images/segment-distributors.jpg',
+    image: `${BASE}images/segment-distributors.jpg`,
     alt: 'Cold-chain refrigerated transport trucks docked at an architectural logistics center at dusk',
     span: 'lg:col-span-5',
   },
@@ -26,7 +28,7 @@ const SEGMENTS = [
     title: 'Producers',
     description:
       'Understand market demand, anticipate purchasing opportunities, and make more informed production and distribution decisions.',
-    image: '/images/segment-producers.jpg',
+    image: `${BASE}images/segment-producers.jpg`,
     alt: 'Freshly harvested heirloom tomatoes and peppers sorted in matte black crates inside a modern packing facility',
     span: 'lg:col-span-4',
   },
@@ -34,7 +36,7 @@ const SEGMENTS = [
     title: 'Retailers',
     description:
       'Forecast demand, plan inventory, and reduce the risk of shortages or excess stock.',
-    image: '/images/segment-retailers.jpg',
+    image: `${BASE}images/segment-retailers.jpg`,
     alt: 'Contemporary architectural fresh-food retail market with dark steel displays under warm spotlights',
     span: 'lg:col-span-4',
   },
@@ -42,7 +44,7 @@ const SEGMENTS = [
     title: 'Food Supply Organizations',
     description:
       'Gain visibility into regional supply patterns and support better food distribution planning.',
-    image: '/images/segment-organizations.jpg',
+    image: `${BASE}images/segment-organizations.jpg`,
     alt: 'High-angle view inside a regional food supply coordination warehouse with organized grain sacks and produce staging zones',
     span: 'lg:col-span-4',
   },
