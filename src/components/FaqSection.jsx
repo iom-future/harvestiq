@@ -6,10 +6,7 @@ export default function FaqSection() {
   const [openIndex, setOpenIndex] = useState(0);
 
   return (
-    <section
-      id="about"
-      className="py-20 lg:py-28 bg-[#111821] border-b border-[#273440]"
-    >
+    <section className="py-20 lg:py-28 bg-[#111821] border-b border-[#273440]">
       <div className="max-w-7xl mx-auto px-5 sm:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12">
           <div className="lg:col-span-4">

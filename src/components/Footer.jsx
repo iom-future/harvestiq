@@ -4,8 +4,8 @@ const FOOTER_LINKS = [
   { label: 'Platform', href: '#platform' },
   { label: 'Intelligence', href: '#intelligence' },
   { label: 'Solutions', href: '#solutions' },
-  { label: 'Team', href: '#team' },
   { label: 'About', href: '#about' },
+  { label: 'Team', href: '#team' },
   { label: 'Early Access', href: '#early-access' },
 ];
 

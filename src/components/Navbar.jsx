@@ -6,8 +6,8 @@ const NAV_LINKS = [
   { id: 'platform', label: 'Platform', href: '#platform' },
   { id: 'intelligence', label: 'Intelligence', href: '#intelligence' },
   { id: 'solutions', label: 'Solutions', href: '#solutions' },
-  { id: 'team', label: 'Team', href: '#team' },
   { id: 'about', label: 'About', href: '#about' },
+  { id: 'team', label: 'Team', href: '#team' },
 ];
 
 export default function Navbar() {
@@ -42,7 +42,8 @@ export default function Navbar() {
       for (const link of NAV_LINKS) {
         const el = document.getElementById(link.id);
         if (!el) continue;
-        if (offset >= el.offsetTop) {
+        const sectionTop = el.getBoundingClientRect().top + y;
+        if (offset >= sectionTop) {
           current = link.id;
         }
       }

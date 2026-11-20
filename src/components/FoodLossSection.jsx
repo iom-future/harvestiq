@@ -23,7 +23,10 @@ const BENEFITS = [
 
 export default function FoodLossSection() {
   return (
-    <section className="py-20 lg:py-28 bg-[#0A0D12] border-b border-[#273440]">
+    <section
+      id="about"
+      className="py-20 lg:py-28 bg-[#0A0D12] border-b border-[#273440]"
+    >
       <div className="max-w-7xl mx-auto px-5 sm:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
           {/* Left Explanation & Benefits */}
